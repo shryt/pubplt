@@ -1,12 +1,13 @@
+import os
 from matplotlib import pyplot as plt
 import japanize_matplotlib  # noqa: F401
 
 
 class SimpleFigure:
     def __init__(
-        self, filename=None, title=None, xlabel=None, ylabel=None
+        self, file_path=None, title=None, xlabel=None, ylabel=None
     ):
-        self.filename = filename
+        self.file_path = file_path
         self.title = title
         self.xlabel = xlabel
         self.ylabel = ylabel
@@ -23,5 +24,8 @@ class SimpleFigure:
         return self.ax
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self.filename is not None:
-            self.fig.savefig(self.filename)
+        if self.file_path is not None:
+            os.makedirs(
+                os.path.dirname(self.file_path), exist_ok=True
+            )
+            self.fig.savefig(self.file_path)
