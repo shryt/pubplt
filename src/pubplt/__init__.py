@@ -29,4 +29,4 @@ class SimpleFigure:
                 os.path.dirname(self.file_path), exist_ok=True
             )
             self.fig.savefig(self.file_path)
-        self.fig.clear()
+        plt.close(self.fig)
